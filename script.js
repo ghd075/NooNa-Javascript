@@ -7,29 +7,31 @@ function addTodo() {
   if(!addValue.value) {
     alert('내용을 입력하세요!');
     addValue.focus();
+  } else {
+    
+    let list = document.createElement('li');
+    let del = document.createElement('button');
+    list.innerHTML = addValue.value;
+    result.appendChild(list);   // 추가된 할일에 할일 리스트 추가하기
+    list.appendChild(del);  // 할일 리스트 추가시 삭제버튼도 추가
+    del.innerText = "x";      //삭제버튼에 들어갈 'x'자 문자
+    del.style.fontSize = "20px";
+    del.style.border = "none";
+    del.style.float = "right";
+    del.style.right = "17px";
+    del.style.marginTop = "10px";
+    del.style.cursor = "pointer";
+    del.style.position='relative';
+    del.addEventListener("click", deleteList); //삭제버튼 클릭시 리스트지우기 이벤트 실행
+  
+    addValue.value = '';      // 할일 입력창 초기화
+    addValue.focus();         // 강제 커서 깜빡임
+    list.addEventListener('click', function(){
+      list.style.textDecoration = 'line-through';
+      list.style.color = 'red';   // 클릭시 색변환
+    });
   }
 
-  let list = document.createElement('li');
-  let del = document.createElement('button');
-  list.innerHTML = addValue.value;
-  result.appendChild(list);   // 추가된 할일에 할일 리스트 추가하기
-  list.appendChild(del);  // 할일 리스트 추가시 삭제버튼도 추가
-  del.innerText = "x";      //삭제버튼에 들어갈 'x'자 문자
-  del.style.fontSize = "20px";
-  del.style.border = "none";
-  del.style.float = "right";
-  del.style.right = "17px";
-  del.style.marginTop = "10px";
-  del.style.cursor = "pointer";
-  del.style.position='relative';
-  del.addEventListener("click", deleteList); //삭제버튼 클릭시 리스트지우기 이벤트 실행
-
-  addValue.value = '';      // 할일 입력창 초기화
-  addValue.focus();         // 강제 커서 깜빡임
-  list.addEventListener('click', function(){
-    list.style.textDecoration = 'line-through';
-    list.style.color = 'red';   // 클릭시 색변환
-  });
 }
 
 // 할일 목록 삭제시
